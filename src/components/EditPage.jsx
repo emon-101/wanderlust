@@ -43,11 +43,9 @@ const EditPage = ({ destination }) => {
   return (
     <div>
       <Modal>
-        <div className="flex justify-end">
           <Button variant="outline" className={"rounded-none"}>
             <RiEditLine /> Edit
           </Button>
-        </div>
         <Modal.Backdrop>
           <Modal.Container placement="auto">
             <Modal.Dialog className="sm:max-w-xl">

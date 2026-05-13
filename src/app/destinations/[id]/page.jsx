@@ -1,3 +1,4 @@
+import { DeletePage } from "@/components/DeletePage";
 import EditPage from "@/components/EditPage";
 import { Button } from "@heroui/react";
 import Image from "next/image";
@@ -13,7 +14,10 @@ const DestinationDetailsPage = async ({ params }) => {
     destination;
   return (
     <div className="lg:w-3/4 mx-auto px-4 my-10">
+      <div className="flex justify-end gap-2">
         <EditPage destination={destination} />
+        <DeletePage destination={destination} />
+      </div>
       <Image
         className="w-full h-128 object-cover my-5"
         alt={destinationName}
@@ -32,8 +36,8 @@ const DestinationDetailsPage = async ({ params }) => {
           </div>
         </div>
         <div className="">
-            <h1 className="text-3xl">Overview</h1>
-            <p>{description}</p>
+          <h1 className="text-3xl">Overview</h1>
+          <p>{description}</p>
         </div>
       </div>
     </div>
