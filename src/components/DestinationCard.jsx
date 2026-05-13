@@ -1,11 +1,13 @@
 import { Button } from "@heroui/react";
 import Image from "next/image";
+import Link from "next/link";
 import { FaRegCalendarDays } from "react-icons/fa6";
+import { MdArrowOutward } from "react-icons/md";
 import { PiMapPinLineLight } from "react-icons/pi";
 
 
 const DestinationCard = ({destination}) => {
-    const {destinationName, country, price, duration, imageUrl} = destination;
+    const {_id, destinationName, country, price, duration, imageUrl} = destination;
     return (
         <div className="py-5 px-3 border border-zinc-300 shadow rounded-lg">
             <Image
@@ -29,7 +31,9 @@ const DestinationCard = ({destination}) => {
                 <div className="flex gap-1 items-center text-sm mb-4">
                     <FaRegCalendarDays /> <span>{duration}</span>
                 </div>
-                <Button fullWidth>Book Now</Button>
+                <Link href={`/destinations/${_id}`}>
+                    <Button fullWidth>Book Now <MdArrowOutward /></Button>
+                </Link>
             </div>
         </div>
     );

@@ -1,10 +1,8 @@
-import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
 
 const Navbar = () => {
     return (
-        <nav className='flex justify-between items-center p-5'>
+        <nav className='flex flex-col lg:flex-row justify-between items-center p-5'>
             <div className="flex-1">
                 <ul className='flex items-center gap-4'>
                     <li><Link href={'/'}>home</Link></li>
@@ -14,7 +12,7 @@ const Navbar = () => {
                     <li><Link href={'/add-destination'}>Add Destination</Link></li>
                 </ul>
             </div>
-            <div className="">
+            <div className="hidden lg:flex">
                 <h3 className='text-3xl lg:text-4xl text-blue-600 font-bold'>Wanderlust</h3>
             </div>
             <div className="flex-1">
