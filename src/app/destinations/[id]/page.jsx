@@ -1,6 +1,9 @@
+import EditPage from "@/components/EditPage";
+import { Button } from "@heroui/react";
 import Image from "next/image";
 import { FaRegCalendarDays } from "react-icons/fa6";
 import { PiMapPinLineLight } from "react-icons/pi";
+import { RiEditLine } from "react-icons/ri";
 
 const DestinationDetailsPage = async ({ params }) => {
   const { id } = await params;
@@ -10,8 +13,9 @@ const DestinationDetailsPage = async ({ params }) => {
     destination;
   return (
     <div className="lg:w-3/4 mx-auto px-4 my-10">
+        <EditPage destination={destination} />
       <Image
-        className="w-full h-128 object-cover mb-5"
+        className="w-full h-128 object-cover my-5"
         alt={destinationName}
         src={imageUrl}
         height={500}
