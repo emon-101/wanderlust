@@ -9,29 +9,37 @@ import {
   Form,
   Input,
   Label,
+  Separator,
   TextField,
 } from "@heroui/react";
 import { redirect } from "next/navigation";
+import { FcGoogle } from "react-icons/fc";
 
 const SignupPage = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const user = Object.fromEntries(formData.entries());
-    const {data, error} = await authClient.signUp.email({
-        email: user.email,
-        password: user.password,
-        name: user.name,
-        image: user.image
-    })
+    const { data, error } = await authClient.signUp.email({
+      email: user.email,
+      password: user.password,
+      name: user.name,
+      image: user.image,
+    });
 
-    if(data) {
-        alert(`SignUp Successful for ${user.name}`);
-        redirect('/');
+    if (data) {
+      alert(`SignUp Successful for ${user.name}`);
+      redirect("/");
     }
-    if(error) {
-        alert(error.message);
+    if (error) {
+      alert(error.message);
     }
+  };
+
+  const handleGoogleSignIn = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+    });
   };
   return (
     <div className="lg:w-1/2 mx-auto my-10">
@@ -43,19 +51,12 @@ const SignupPage = () => {
       </div>
       <Card className="border p-10">
         <Form className="flex flex-col gap-4" onSubmit={onSubmit}>
-            <TextField
-            isRequired
-            name="name"
-            type="text"
-          >
+          <TextField isRequired name="name" type="text">
             <Label>Full Name</Label>
             <Input placeholder="Enter Your Full Name" />
             <FieldError />
           </TextField>
-          <TextField
-            name="image"
-            type="url"
-          >
+          <TextField name="image" type="url">
             <Label>Image URL</Label>
             <Input placeholder="Enter Image URL" />
             <FieldError />
@@ -106,6 +107,21 @@ const SignupPage = () => {
             </Button>
           </div>
         </Form>
+        <div className="flex justify-center items-center">
+          <Separator />
+          <div className="whitespace-nowrap px-2">or sign up with</div>
+          <Separator />
+        </div>
+        <div className="">
+          <Button
+            onClick={handleGoogleSignIn}
+            variant="outline"
+            className={"w-full flex items-center"}
+            type="submit"
+          >
+            <FcGoogle /> Sign In with google
+          </Button>
+        </div>
       </Card>
     </div>
   );

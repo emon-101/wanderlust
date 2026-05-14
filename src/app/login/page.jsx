@@ -9,29 +9,37 @@ import {
   Form,
   Input,
   Label,
+  Separator,
   TextField,
 } from "@heroui/react";
 import { redirect } from "next/navigation";
+import { FcGoogle } from "react-icons/fc";
 
 const LoginPage = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const user = Object.fromEntries(formData.entries());
-    const {data, error} = await authClient.signIn.email({
-        email: user.email,
-        password: user.password,
-    })
+    const { data, error } = await authClient.signIn.email({
+      email: user.email,
+      password: user.password,
+    });
 
-    console.log({data, error});
+    console.log({ data, error });
 
-    if(data) {
-        alert(`Login Successful for ${data.user.name}`);
-        redirect('/');
+    if (data) {
+      alert(`Login Successful for ${data.user.name}`);
+      redirect("/");
     }
-    if(error) {
-        alert(error.message);
+    if (error) {
+      alert(error.message);
     }
+  };
+
+  const handleGoogleSignIn = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+    });
   };
   return (
     <div className="lg:w-1/2 mx-auto my-10">
@@ -89,6 +97,21 @@ const LoginPage = () => {
             </Button>
           </div>
         </Form>
+        <div className="flex justify-center items-center">
+          <Separator />
+          <div className="whitespace-nowrap px-2">or sign up with</div>
+          <Separator />
+        </div>
+        <div className="">
+          <Button
+            onClick={handleGoogleSignIn}
+            variant="outline"
+            className={"w-full flex items-center"}
+            type="submit"
+          >
+            <FcGoogle /> Sign In with google
+          </Button>
+        </div>
       </Card>
     </div>
   );

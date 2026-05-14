@@ -9,6 +9,10 @@ const Navbar = () => {
         data: session,
     } = authClient.useSession();
     const user = session?.user;
+
+    const handleSignout = async() => {
+        await authClient.signOut();
+    }
     return (
         <nav className='flex flex-col lg:flex-row justify-between items-center p-5'>
             <div className="flex-1">
@@ -36,7 +40,7 @@ const Navbar = () => {
                             height={40}
                             width={40}
                             />
-                            <Button variant='outline' className={'rounded-none text-red-500'}>Logout</Button>
+                            <Button onClick={handleSignout} variant='outline' className={'rounded-none text-red-500'}>Logout</Button>
                         </> :
                         <>
                             <li><Link href={'/login'}>Login</Link></li>
