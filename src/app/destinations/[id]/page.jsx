@@ -1,3 +1,4 @@
+import BookingCard from "@/components/BookingCard";
 import { DeletePage } from "@/components/DeletePage";
 import EditPage from "@/components/EditPage";
 import { Button } from "@heroui/react";
@@ -25,19 +26,24 @@ const DestinationDetailsPage = async ({ params }) => {
         height={500}
         width={500}
       />
-      <div className="space-y-2">
-        <div className="flex items-center gap-1 font-semibold text-zinc-500">
-          <PiMapPinLineLight /> <span>{country}</span>
-        </div>
-        <h1 className="text-5xl">{destinationName}</h1>
-        <div className="">
-          <div className="flex gap-1 items-center text-sm mb-4">
-            <FaRegCalendarDays /> <span>{duration}</span>
+      <div className="flex justify-between gap-20">
+        <div className="space-y-2 flex-1">
+          <div className="flex items-center gap-1 font-semibold text-zinc-500">
+            <PiMapPinLineLight /> <span>{country}</span>
+          </div>
+          <h1 className="text-5xl">{destinationName}</h1>
+          <div className="">
+            <div className="flex gap-1 items-center text-sm mb-4">
+              <FaRegCalendarDays /> <span>{duration}</span>
+            </div>
+          </div>
+          <div className="">
+            <h1 className="text-3xl">Overview</h1>
+            <p>{description}</p>
           </div>
         </div>
         <div className="">
-          <h1 className="text-3xl">Overview</h1>
-          <p>{description}</p>
+          <BookingCard destination={destination} />
         </div>
       </div>
     </div>
