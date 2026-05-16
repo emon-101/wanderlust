@@ -1,15 +1,16 @@
 import BookingCard from "@/components/BookingCard";
 import { DeletePage } from "@/components/DeletePage";
 import EditPage from "@/components/EditPage";
-import { Button } from "@heroui/react";
 import Image from "next/image";
 import { FaRegCalendarDays } from "react-icons/fa6";
 import { PiMapPinLineLight } from "react-icons/pi";
-import { RiEditLine } from "react-icons/ri";
-
 const DestinationDetailsPage = async ({ params }) => {
   const { id } = await params;
-  const res = await fetch(`http://localhost:5000/destination/${id}`);
+  const res = await fetch(`http://localhost:5000/destination/${id}`, {
+    headers: {
+      authorization: "logged out"
+    }
+  })
   const destination = await res.json();
   const { destinationName, country, price, duration, imageUrl, description } =
     destination;
