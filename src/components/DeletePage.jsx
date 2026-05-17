@@ -7,7 +7,7 @@ import { FaRegTrashCan } from "react-icons/fa6";
 export function DeletePage({destination}) {
     const { _id ,destinationName } = destination;
     const handleDelete = async() => {
-        const res = await fetch(`http://localhost:5000/destination/${_id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/destination/${_id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
