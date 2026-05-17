@@ -1,14 +1,19 @@
 import BookingCard from "@/components/BookingCard";
 import { DeletePage } from "@/components/DeletePage";
 import EditPage from "@/components/EditPage";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import Image from "next/image";
 import { FaRegCalendarDays } from "react-icons/fa6";
 import { PiMapPinLineLight } from "react-icons/pi";
 const DestinationDetailsPage = async ({ params }) => {
   const { id } = await params;
+  const {token} = await auth.api.getToken({
+    headers: await headers()
+  })
   const res = await fetch(`http://localhost:5000/destination/${id}`, {
     headers: {
-      authorization: "logged out"
+      authorization: `Bearer ${token}`
     }
   })
   const destination = await res.json();
